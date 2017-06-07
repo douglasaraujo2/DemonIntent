@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DemonIntent</string>
+    <string name="login_text">Login</string>
+    <string name="hint_login">Digite seu login</string>
+    <string name="senha_text">Senha</string>
+    <string name="hint_senha">Digite sua senha</string>
+    <string name="novo_user_text">Sou novo usuário</string>
+</resources>
