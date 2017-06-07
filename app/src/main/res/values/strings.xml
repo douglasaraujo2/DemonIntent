@@ -5,4 +5,7 @@
     <string name="senha_text">Senha</string>
     <string name="hint_senha">Digite sua senha</string>
     <string name="novo_user_text">Sou novo usuário</string>
+    <string name="hint_username">Digite seu username</string>
+    <string name="hint_nome">Digite seu nome</string>
+    <string name="criar_text">criar</string>
 </resources>

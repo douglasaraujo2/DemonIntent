@@ -18,7 +18,8 @@
     <Button
         style="@style/baseButton"
         android:text="@string/login_text"
-        android:id="@+id/btnConectar"/>
+        android:id="@+id/btnConectar"
+        android:onClick="conectar"/>
     <TextView
         style="@style/baseTextViewCriar"
         android:text="@string/novo_user_text"
