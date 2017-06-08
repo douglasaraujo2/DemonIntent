@@ -1,6 +1,10 @@
 package douglas.android.com.demonintent;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,10 +35,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        if (savedInstanceState != null){
-            tvNovoUsuario.setText(savedInstanceState.getString("TEXTO"));
-        }
+        requestSmsPermission();
+
     }
+
 
     @OnClick(R.id.tvNovoUsuario)
     public void novoUsuarioClick() {
@@ -47,17 +51,22 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case REQUEST_NOVO_USUARIO:
-                    etLogin.setText(data.getStringExtra("USERNAME"));
-                tvNovoUsuario.setText(data.getStringExtra("USERNAME"));
+                etLogin.setText(data.getStringExtra("USERNAME"));
                 break;
         }
 
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("TEXTO",tvNovoUsuario.getText().toString());
+    private void requestSmsPermission() {
+        String permission = Manifest.permission.RECEIVE_SMS;
+        int grant = ContextCompat.checkSelfPermission(this, permission);
+        if (grant != PackageManager.PERMISSION_GRANTED) {
+            String[] permission_list = new String[1];
+            permission_list[0] = permission;
+            ActivityCompat.requestPermissions(this, permission_list, 1);
+        }
     }
+
+
 }
