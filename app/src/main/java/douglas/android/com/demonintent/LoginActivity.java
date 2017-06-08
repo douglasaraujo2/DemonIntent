@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,12 +22,18 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.etSenha)
     EditText etSenha;
 
+    @BindView(R.id.tvNovoUsuario)
+    TextView tvNovoUsuario;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        if (savedInstanceState != null){
+            tvNovoUsuario.setText(savedInstanceState.getString("TEXTO"));
+        }
     }
 
     @OnClick(R.id.tvNovoUsuario)
@@ -40,9 +48,16 @@ public class LoginActivity extends AppCompatActivity {
         switch (requestCode) {
             case REQUEST_NOVO_USUARIO:
                     etLogin.setText(data.getStringExtra("USERNAME"));
+                tvNovoUsuario.setText(data.getStringExtra("USERNAME"));
                 break;
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("TEXTO",tvNovoUsuario.getText().toString());
     }
 }
